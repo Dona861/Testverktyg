@@ -3,9 +3,11 @@ class FavoriteBooks:
         self.favorites = []
 
     def add(self, book):
-        if book not in self.favorites:
+        if not any(b["id"] == book["id"] for b in self.favorites):
             self.favorites.append(book)
 
     def remove(self, book):
-        if book in self.favorites:
-            self.favorites.remove(book)
+        self.favorites = [
+            b for b in self.favorites
+            if b["id"] != book["id"]
+        ]
