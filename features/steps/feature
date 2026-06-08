@@ -1,0 +1,5 @@
+from behave import given, when, then
+
+@given("something works")
+def step_impl(context):
+    pass
