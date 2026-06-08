@@ -1,61 +1,59 @@
 # Svar på teorifrågor – Testverktyg
 
----
+## 1. Skillnad mellan testtyper
 
-## 1. Skillnad mellan enhetstest, integrationstest, regressionstest och prestandatest
+**Enhetstester:**
+Testar en liten del av systemet isolerat, t.ex. en metod i backend utan beroenden.
+I mitt projekt testas t.ex. BookStore.addBook() och toggleFavorite().
 
-**Enhetstest (unit test):**
-Testar en liten del av koden, t.ex. en funktion eller metod isolerat.
-Exempel: testa `addBook()` i BookStore.
+**Integrationstester:**
+Testar hur olika delar av systemet fungerar tillsammans, t.ex. BookStore och FavoriteBooks.
 
-**Integrationstest:**
-Testar att flera delar fungerar tillsammans.
-Exempel: BookStore och FavoriteBooks som samverkar.
+**Regressionstester:**
+Säkerställer att ny kod inte förstör befintlig funktionalitet. I mitt projekt sker detta via att alla Behave- och Pytest-tester körs varje gång.
 
-**Regressionstest:**
-Testar att gamla funktioner fortfarande fungerar efter ändringar i koden.
-
-**Prestandatest:**
-Testar hur snabbt eller effektivt systemet fungerar under belastning.
+**Prestandatester:**
+Mäter hur systemet fungerar under belastning, t.ex. många böcker eller många klick.
 
 ---
 
-## 2. Hur TDD fungerar
+## 2. TDD (Test Driven Development)
 
-TDD (Test Driven Development) innebär att man:
+TDD följer cykeln Red → Green → Refactor:
 
-1. Skriver ett test först (som initialt misslyckas)
-2. Skriver kod som gör att testet passerar
-3. Förbättrar koden (refaktorering)
+- Red: skriva ett test som misslyckas
+- Green: skriva minsta kod för att testet ska passera
+- Refactor: förbättra koden utan att ändra funktion
 
-Det gör att man bygger koden utifrån krav och säkerställer att den fungerar steg för steg.
+I mitt backendarbete använde jag detta för BookStore och FavoriteBooks för att säkerställa korrekt logik från början.
 
 ---
 
-## 3. Skillnad mellan BDD och TDD
+## 3. Skillnad mellan TDD och BDD
 
 **TDD:**
-
-- Fokuserar på kod och funktioner
-- Skriver tester på utvecklarnivå
+Fokuserar på kodens funktion och används av utvecklare på kodnivå.
 
 **BDD:**
-
-- Fokuserar på användarbeteende
-- Skriver tester som user stories (Given/When/Then)
-- Är mer förståeligt för icke-tekniska personer
+Fokuserar på användarbeteende och skrivs i Gherkin (Given/When/Then).
+I mitt projekt används BDD för frontendtester med Playwright + Behave.
 
 ---
 
-## 4. Vilka tester jag skulle använda i en liknande webbsida och varför
+## 4. Teststrategi för en liknande webbapp
 
-Jag skulle använda flera typer av tester:
+Jag skulle använda:
 
-- **Enhetstester:** för backend-logik (t.ex. bokhantering)
-- **Integrationstester:** för att se att favoritlistan och boklistan fungerar tillsammans
-- **End-to-end tester (E2E):** för att testa hela flödet i webbläsaren
-- **Regressionstester:** för att säkerställa att nya ändringar inte förstör tidigare funktioner
+**Enhetstester**
+För affärslogik i backend (snabb feedback och hög kontroll).
 
-Jag skulle också använda BDD för frontend eftersom det gör testerna lättare att förstå och kopplar dem till användarens beteende.
+**Integrationstester**
+För att säkerställa att klasser och API:er fungerar tillsammans.
 
-Detta gör systemet stabilt och lätt att vidareutveckla.
+**E2E-tester (Playwright + BDD)**
+För att testa hela användarflöden i webbläsaren, t.ex. favoriter och navigation.
+
+**Regressionstester via CI**
+För att automatiskt upptäcka fel vid nya commits.
+
+Denna kombination ger hög stabilitet och gör systemet lätt att vidareutveckla.

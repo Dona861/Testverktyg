@@ -1,22 +1,71 @@
-# Exam Project
+# Exam Project – Läslistan (TAP HT25D)
 
 ## Beskrivning
 
-Detta projekt innehåller backend- och frontendtester för webbsidan Läslistan.
+Detta projekt innehåller automatiserade tester för webbapplikationen "Läslistan".
 
-Projektet använder:
+Testerna är skrivna med:
 
-- Python + Pytest för backendtester
-- Playwright + Cucumber för frontendtester
-- GitHub Actions för CI
+- Python
+- Behave (BDD)
+- Playwright (E2E tester)
+- Pytest (backend tester)
+- Page Object Model (POM)
 
 ---
 
-## Installation
+## Testade funktioner
 
-### Klona projektet
+### Frontend (BDD / Playwright)
+
+Följande funktionalitet testas:
+
+- 📚 Katalog
+  - Kontroll att boklista visas korrekt vid sidladdning
+
+- ❤️ Favoriter
+  - Markera bok som favorit
+  - Avmarkera favorit
+  - Toggle-funktion (flera klick)
+  - Scenario Outline används för flera testfall
+
+- 📊 Statistik
+  - Kontroll att antal favoriter visas korrekt
+
+- 📖 Mina böcker
+  - Kontroll att endast sparade favoriter visas
+
+---
+
+### Backend (Pytest)
+
+- BookStore:
+  - addBook()
+  - toggleFavorite()
+
+- FavoriteBooks:
+  - add()
+  - remove()
+
+- Integrationstest mellan klasserna
+
+---
+
+## Design / Struktur
+
+Projektet använder Page Object Model:
+
+- `CatalogPage`
+- `FavoritesPage`
+
+Det gör testerna mer återanvändbara och lättare att underhålla.
+
+---
+
+## Kör tester
+
+### Installera beroenden
 
 ```bash
-git clone <din-github-länk>
-cd exam-project
+pip install -r requirements.txt
 ```

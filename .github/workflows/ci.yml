@@ -11,35 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # -------------------
-      # PYTHON BACKEND TESTS
-      # -------------------
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
-      - name: Install backend dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
-
-      - name: Run backend tests
-        run: python -m pytest -v
-
-      # -------------------
-      # NODE FRONTEND TESTS
-      # -------------------
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install frontend dependencies
-        run: npm install
+          pip install pytest playwright behave
 
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: python -m playwright install --with-deps
 
-      - name: Run Cucumber tests
-        run: npx cucumber-js
+      - name: Run Python Backend Tests (Pytest)
+        run: python -m pytest -v
+
+      - name: Run Frontend End-to-End Tests (Behave)
+        run: behave
